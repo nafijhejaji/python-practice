@@ -1,0 +1,9 @@
+# vars.py
+name = "alpha"        # string
+age = 20              # integer
+height = 5.8          # float
+is_student = True     # boolean
+
+print(name, "is", age, "years old.")
+print("Height:", height)
+print("Student?", is_student)
