@@ -1,0 +1,7 @@
+# calc.py
+a = float(input("First number: "))
+b = float(input("Second number: "))
+print("Add:", a + b)
+print("Sub:", a - b)
+print("Mul:", a * b)
+print("Div:", a / b if b != 0 else "Infinity")
