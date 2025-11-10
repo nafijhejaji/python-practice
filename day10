@@ -1,0 +1,7 @@
+nums = [3, -1, 0, 5, -2, 9]
+pos = neg = zero = 0
+for n in nums:
+    if n > 0: pos += 1
+    elif n < 0: neg += 1
+    else: zero += 1
+print("Positive:", pos, "Negative:", neg, "Zero:", zero)
