@@ -1,0 +1,19 @@
+num = int(input("Enter a number: "))
+temp = num
+is_increasing = True
+
+prev = temp % 10
+temp //= 10
+
+while temp > 0:
+    digit = temp % 10
+    if digit > prev:
+        is_increasing = False
+        break
+    prev = digit
+    temp //= 10
+
+if is_increasing:
+    print(num, "digits are in increasing order")
+else:
+    print(num, "digits are NOT in increasing order")
