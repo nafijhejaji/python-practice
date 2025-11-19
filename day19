@@ -1,0 +1,15 @@
+num = int(input("Enter a number: "))
+even = 0
+odd = 0
+temp = num
+
+while temp > 0:
+    digit = temp % 10
+    if digit % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    temp //= 10
+
+print("Even digits:", even)
+print("Odd digits:", odd)
