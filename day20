@@ -1,0 +1,12 @@
+numbers = [12, 3, 7, 18, 5, 20]
+even_sum = 0
+odd_sum = 0
+
+for n in numbers:
+    if n % 2 == 0:
+        even_sum += n
+    else:
+        odd_sum += n
+
+print("Even sum:", even_sum)
+print("Odd sum:", odd_sum)
