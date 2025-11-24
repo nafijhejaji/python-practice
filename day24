@@ -1,0 +1,13 @@
+num = int(input("Enter a number: "))
+sq = str(num * num)
+
+left = sq[:len(sq)//2]
+right = sq[len(sq)//2:]
+
+left = int(left) if left else 0
+right = int(right)
+
+if left + right == num:
+    print(num, "is a Kaprekar number")
+else:
+    print(num, "is NOT a Kaprekar number")
