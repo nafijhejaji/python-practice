@@ -1,0 +1,15 @@
+text = input("Enter text: ").lower()
+seen = set()
+is_iso = True
+
+for ch in text:
+    if ch.isalpha():
+        if ch in seen:
+            is_iso = False
+            break
+        seen.add(ch)
+
+if is_iso:
+    print("Isogram")
+else:
+    print("Not an Isogram")
