@@ -1,0 +1,82 @@
+# -------------------------------
+# Book Class
+# -------------------------------
+class Book:
+    def __init__(self, title, author, isbn):
+        self.title = title
+        self.author = author
+        self.isbn = isbn
+
+    def __str__(self):
+        return f"Title: {self.title}, Author: {self.author}, ISBN: {self.isbn}"
+
+
+# -------------------------------
+# Library Class
+# -------------------------------
+class Library:
+    def __init__(self):
+        self.books = {}   # key = ISBN, value = Book object
+
+    def add_book(self, book: Book):
+        if book.isbn in self.books:
+            print("Book with this ISBN already exists!")
+        else:
+            self.books[book.isbn] = book
+            print(f"Added: {book.title}")
+
+    def remove_book(self, isbn: str):
+        if isbn in self.books:
+            removed = self.books.pop(isbn)
+            print(f"Removed: {removed.title}")
+        else:
+            print("No book found with this ISBN.")
+
+    def search_by_title(self, title: str):
+        result = []
+        for book in self.books.values():
+            if title.lower() in book.title.lower():
+                result.append(book)
+        return result
+
+    def display_books(self):
+        if not self.books:
+            print("Library is empty.")
+            return
+        print("\n--- Books in Library ---")
+        for book in self.books.values():
+            print(book)
+        print("------------------------\n")
+
+
+# -------------------------------
+# Demonstration
+# -------------------------------
+
+# Create library
+library = Library()
+
+# Add at least three books
+book1 = Book("Python Basics", "John Doe", "1111")
+book2 = Book("Data Structures in Python", "Alice Smith", "2222")
+book3 = Book("Learning Python", "Mark Lutz", "3333")
+
+library.add_book(book1)
+library.add_book(book2)
+library.add_book(book3)
+
+# Display all books
+library.display_books()
+
+# Search for a book by title
+print("Searching for 'Python'...")
+search_results = library.search_by_title("Python")
+for b in search_results:
+    print(b)
+
+# Remove a book
+print("\nRemoving book with ISBN 2222...")
+library.remove_book("2222")
+
+# Display updated list
+library.display_books()
