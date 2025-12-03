@@ -1,0 +1,13 @@
+num = int(input("Enter number: "))
+visited = set()
+
+while num not in visited:
+    visited.add(num)
+    total = sum(int(d)**2 for d in str(num))
+    if total == 1:
+        print("Happy number")
+        break
+    num = total
+else:
+    print("Not a Happy number")
+  
