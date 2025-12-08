@@ -1,0 +1,30 @@
+import random
+import time
+
+print("💘 Welcome to the Ultra Pro Max Love Calculator 💘\n")
+
+name1 = input("Enter your name: ")
+name2 = input("Enter your crush's name: ")
+
+print("\nCalculating your love compatibility...")
+time.sleep(1)
+print("Analyzing feelings...")
+time.sleep(1)
+print("Checking future possibilities...")
+time.sleep(1)
+
+love_score = random.randint(0, 100)
+
+print("\n❤️ Love Result ❤️")
+print(f"{name1} ❤️ {name2} = {love_score}%")
+
+if love_score > 80:
+    print("🔥 Perfect match! Wedding card ready!")
+elif love_score > 50:
+    print("😊 Good match! Go propose!")
+elif love_score > 30:
+    print("😅 One-sided love detected!")
+else:
+    print("💔 Brother, focus on career 😭")
+
+print("\n⚠️ This calculation is powered by vibes, not science 😆")
