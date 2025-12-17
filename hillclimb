@@ -1,0 +1,29 @@
+import random
+
+def objective_function(x):
+    # The function we want to maximize
+    return -(x - 5)**2 + 10
+
+def hill_climbing(iterations, step_size):
+    # 1. Start with a random initial solution
+    current_x = random.uniform(-10, 10)
+    current_val = objective_function(current_x)
+    
+    for i in range(iterations):
+        # 2. Explore a neighbor (move slightly left or right)
+        next_x = current_x + random.uniform(-step_size, step_size)
+        next_val = objective_function(next_x)
+        
+        # 3. If the neighbor is better, move there
+        if next_val > current_val:
+            current_x, current_val = next_x, next_val
+            print(f"Iteration {i}: x = {current_x:.4f}, f(x) = {current_val:.4f}")
+            
+    return current_x, current_val
+
+# Run the algorithm
+best_x, best_val = hill_climbing(iterations=1000, step_size=0.1)
+
+print(f"\nOptimization Finished")
+print(f"Best x found: {best_x:.4f}")
+print(f"Max value found: {best_val:.4f}")
