@@ -1,0 +1,59 @@
+import heapq
+
+
+def dijkstra_maze(grid, start, end):
+    rows = len(grid)
+    cols = len(grid[0])
+
+    pq = [(0, start)]
+
+    distances = {start: 0}
+    parent = {start: None}
+
+    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+
+    while pq:
+        current_dist, (curr_x, curr_y) = heapq.heappop(pq)
+
+
+        if (curr_x, curr_y) == end:
+            path = []
+            while (curr_x, curr_y) is not None:
+                path.append((curr_x, curr_y))
+
+                next_node = parent[(curr_x, curr_y)]
+                if next_node is None: break
+                curr_x, curr_y = next_node
+            return path[::-1]
+
+        if current_dist > distances.get((curr_x, curr_y), float('inf')):
+            continue
+
+        for dx, dy in directions:
+            nx, ny = curr_x + dx, curr_y + dy
+
+
+            if 0 <= nx < rows and 0 <= ny < cols and grid[nx][ny] == 0:
+                new_dist = current_dist + 1
+
+                if new_dist < distances.get((nx, ny), float('inf')):
+                    distances[(nx, ny)] = new_dist
+                    parent[(nx, ny)] = (curr_x, curr_y)
+                    heapq.heappush(pq, (new_dist, (nx, ny)))
+
+    return None
+
+
+# Example Usage:
+maze = [
+    [0, 0, 1, 0, 0],
+    [0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1],
+    [1, 1, 0, 1, 0],
+    [0, 0, 0, 0, 0]
+]
+start_pos = (0, 0)
+end_pos = (4, 4)
+
+result = dijkstra_maze(maze, start_pos, end_pos)
+print(f"{result}")
