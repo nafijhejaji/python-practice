@@ -1,0 +1,15 @@
+import socket
+
+def get_banner(ip, port):
+    try:
+        s = socket.socket()
+        s.settimeout(2)
+        s.connect((ip, port))
+        # Receive the banner (usually the service name and version)
+        banner = s.recv(1024)
+        return banner.decode().strip()
+    except Exception as e:
+        return f"Could not retrieve banner: {e}"
+
+# Example: Checking a web server banner
+print(get_banner("google.com", 80))
