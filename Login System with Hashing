@@ -1,0 +1,12 @@
+import hashlib
+
+users = {}
+
+def register(username, password):
+    users[username] = hashlib.sha256(password.encode()).hexdigest()
+
+def login(username, password):
+    return users.get(username) == hashlib.sha256(password.encode()).hexdigest()
+
+register("admin", "secure123")
+print(login("admin", "secure123"))
