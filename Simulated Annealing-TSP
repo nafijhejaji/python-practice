@@ -1,0 +1,54 @@
+import math
+import random
+
+# Get input
+N = int(input("Enter number of cities: "))
+locations = []
+for i in range(N):
+    line = input(f"Enter x y for city {i + 1}: ")
+    xy = line.strip().split()
+    locations.append((float(xy[0]), float(xy[1])))
+
+
+def dist(a, b):
+    return math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2)
+def tour_len(route):
+    total = 0
+    for i in range(len(route) - 1):
+        total += dist(locations[route[i]], locations[route[i + 1]])
+    return total
+
+
+def simulated_annealing_2opt():
+    route = list(range(N)) + [0]
+    best_route = route[:]
+    current_dist = tour_len(route)
+    best_dist = current_dist
+
+    T = 1000.0
+    alpha = 0.999
+
+    while T > 0.01:
+        i, j = sorted(random.sample(range(1, N), 2))
+        new_route = route[:i] + route[i:j + 1][::-1] + route[j + 1:]
+
+        new_dist = tour_len(new_route)
+        delta = new_dist - current_dist
+
+        if delta < 0 or random.random() < math.exp(-delta / T):
+            route = new_route
+            current_dist = new_dist
+
+            if current_dist < best_dist:
+                best_dist = current_dist
+                best_route = route[:]
+
+        T *= alpha
+
+    return best_route, best_dist
+
+
+print("\n=== Simulated Annealing (2-Opt) ===")
+route, total_dist = simulated_annealing_2opt()
+print("Route:", " -> ".join(str(x + 1) for x in route))
+print(f"Total Distance: {total_dist:.2f}")
