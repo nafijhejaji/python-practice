@@ -1,0 +1,67 @@
+import heapq
+
+def heuristic(a, b):
+    # Manhattan distance for a grid
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+def a_star(grid, start, goal):
+    neighbors = [(0, 1), (0, -1), (1, 0), (-1, 0)] # Up, Down, Left, Right
+    
+    # Priority queue: (priority, current_node)
+    close_set = set()
+    came_from = {}
+    g_score = {start: 0}
+    f_score = {start: heuristic(start, goal)}
+    oheap = []
+
+    heapq.heappush(oheap, (f_score[start], start))
+    
+    while oheap:
+        current = heapq.heappop(oheap)[1]
+
+        if current == goal:
+            data = []
+            while current in came_from:
+                data.append(current)
+                current = came_from[current]
+            return data[::-1] # Return reversed path
+
+        close_set.add(current)
+        
+        for i, j in neighbors:
+            neighbor = current[0] + i, current[1] + j
+            tentative_g_score = g_score[current] + 1
+            
+            # Check boundaries and obstacles (1 is a wall)
+            if 0 <= neighbor[0] < len(grid):
+                if 0 <= neighbor[1] < len(grid[0]):
+                    if grid[neighbor[0]][neighbor[1]] == 1:
+                        continue
+                else: continue
+            else: continue
+                
+            if neighbor in close_set and tentative_g_score >= g_score.get(neighbor, 0):
+                continue
+                
+            if tentative_g_score < g_score.get(neighbor, 0) or neighbor not in [i[1] for i in oheap]:
+                came_from[neighbor] = current
+                g_score[neighbor] = tentative_g_score
+                f_score[neighbor] = tentative_g_score + heuristic(neighbor, goal)
+                heapq.heappush(oheap, (f_score[neighbor], neighbor))
+                
+    return False # No path found
+
+# Example Usage:
+# 0 = Path, 1 = Wall
+grid = [
+    [0, 0, 0, 0, 1],
+    [1, 1, 0, 1, 0],
+    [0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0]
+]
+
+start = (0, 0)
+goal = (4, 4)
+path = a_star(grid, start, goal)
+print(f"Path found: {path}")
