@@ -1,0 +1,65 @@
+Step 1️⃣ Open your project folder in VS Code
+
+Example folder:
+
+knn-learning/
+
+Step 2️⃣ Activate your virtual environment (once)
+
+In VS Code Terminal:
+
+python3 -m venv knn-env
+source knn-env/bin/activate
+
+
+Check:
+
+python --version
+
+
+✔️ Python 3.9.6
+
+Step 3️⃣ Install required packages inside this env
+python -m pip install numpy pandas matplotlib scikit-learn ipykernel jupyter
+
+
+Register kernel:
+
+python -m ipykernel install --user --name knn-env --display-name "Python 3.9 (knn-env)"
+
+Step 4️⃣ Open your .ipynb file
+
+Now look at the top-right corner of VS Code notebook.
+
+Click:
+
+Select Kernel
+
+
+Choose:
+
+Python 3.9 (knn-env)
+
+
+🚨 If you don’t do this → ModuleNotFoundError WILL happen
+
+Step 5️⃣ Restart kernel (IMPORTANT)
+
+In the notebook menu:
+
+Kernel → Restart Kernel
+
+Step 6️⃣ Environment test cell (run this)
+import numpy
+import pandas
+import matplotlib
+import sklearn
+
+print("Notebook environment is ready!")
+
+
+✔️ If this runs → environment is PERFECT.
+
+
+
+I’ll guide you cell by cell like a lab instructor 🧠📓
